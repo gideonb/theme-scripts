@@ -36,9 +36,15 @@ export function register(type, properties) {
         '" has already been registered. You cannot register the same section type twice'
     );
   }
+  
+  if(!Array.isArray(properties)){
+    properties = [properties]
+  }
 
   function TypedSection(container) {
-    Section.call(this, container, properties);
+    for (var i = 0; i < properties.length; i++) {
+      Section.call(this, container, properties[i]);
+    }
   }
 
   TypedSection.constructor = Section;
